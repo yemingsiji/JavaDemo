@@ -25,7 +25,7 @@ public class SwtichDemo {
                 break;
             case 6:
                 System.out.println("星期6");
-                break;
+               break;
             case 7:
                 System.out.println("星期日");
                 break;
