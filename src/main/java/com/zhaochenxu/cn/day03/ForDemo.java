@@ -1,5 +1,7 @@
 package com.zhaochenxu.cn.day03;
 
+import java.util.Random;
+
 public class ForDemo {
 
 
@@ -32,11 +34,7 @@ public class ForDemo {
             System.out.print("奇数为:"+j);
         }
 
-        for (int x = 0; x <=100 ; x++) {
 
-
-
-        }
 
 
 
