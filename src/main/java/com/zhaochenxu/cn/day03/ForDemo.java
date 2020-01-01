@@ -34,10 +34,22 @@ public class ForDemo {
 
         for (int x = 0; x <=100 ; x++) {
 
+            for (int y = 0; y <=100 ; y++) {
+                System.out.print("*");
+            }
 
-
+            System.out.println();
         }
 
+
+        for (int o = 1; o <6; o++) {
+            for (int oo = 1; oo < 6-o; oo++) {
+                System.out.print("*");
+                
+            }
+            System.out.println();
+            
+        }
 
 
     }
