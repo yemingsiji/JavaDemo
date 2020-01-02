@@ -14,5 +14,5 @@ public interface IUserDao {
 
     List<User> findAll();
 
-
+    void saveUser(User user);
 }
