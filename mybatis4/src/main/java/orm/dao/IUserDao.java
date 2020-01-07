@@ -32,10 +32,19 @@ public interface IUserDao {
     int updateUser(User user);
 
     /**
-     * 删除用户
+     * 删除用户findById
      */
 
     void deleteUser(Integer userId);
+
+    /***
+     *  根据id 查询用户信息
+     *
+     */
+
+    User findById(Integer userId);
+
+
 
     /**
      * 模糊查询
@@ -47,4 +56,6 @@ public interface IUserDao {
      */
 
     int findTotal();
+
+
 }

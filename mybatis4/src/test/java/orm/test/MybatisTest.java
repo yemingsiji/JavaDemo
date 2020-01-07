@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import orm.dao.IUserDao;
+import orm.dao.impl.UserDaoImpl;
 import orm.domain.User.entity.User;
 
 import java.io.IOException;
@@ -19,7 +20,6 @@ import java.util.List;
 public class MybatisTest {
 
     private InputStream in;
-    private SqlSession sqlSession;
     private IUserDao userDao;
 
     @Before
@@ -29,15 +29,13 @@ public class MybatisTest {
 
         SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(in);
 
-        sqlSession = factory.openSession();
 
-        userDao = sqlSession.getMapper(IUserDao.class);
+        userDao = new UserDaoImpl(factory);
 
     }
 
     @After
     public void endClose() throws Exception {
-        sqlSession.close();
         in.close();
     }
 
@@ -61,19 +59,14 @@ public class MybatisTest {
         user.setBirthday(new Date());
         System.out.println("保存之前"+user);
         userDao.saveUser(user);
-
-
-        //需要提交事务
-        sqlSession.commit();
-
         System.out.println("保存之后"+user);
     }
-
-
-    /**
-     *
-     *   更新相关信息
-     * */
+//
+//
+//    /**
+//     *
+//     *   更新相关信息
+//     * */
     @Test
     public void testUpdate() {
 
@@ -88,56 +81,56 @@ public class MybatisTest {
 
 
     }
-
-
-    /***
-     *
-     *  根据id进行删除
-     *
-     */
-
-    @Test
-    public void deleteId() {
-        userDao.deleteUser(57);
-
-
-    }
-
+//
+//
+//    /***
+//     *
+//     *  根据id进行删除
+//     *
+//     */
+//
+//    @Test
+//    public void deleteId() {
+//        userDao.deleteUser(57);
+//
+//
+//    }
+//
     /*
     * 根据用户id进行查询
     * */
-    @Test
-    public void testSelectOne() {
-
-        User user = userDao.findById(58);
-        System.out.println(user);
-    }
-
-
-    /**
-     * 根据name进行模糊查询
-     */
-
-    @Test
-    public void testlikeName(){
-        List<User> users = userDao.findByName("%王%");
-        for (User user:users
-             ) {
-            System.out.println(user);
-
-        }
-    }
-
-
-    /**
-     *  查询全部用户条数
-     * */
-    @Test
-    public void testCount(){
-
-        int total = userDao.findTotal();
-        System.out.println(total);
-    }
+//    @Test
+//    public void testSelectOne() {
+//
+//        User user = userDao.findById(58);
+//        System.out.println(user);
+//    }
+////
+//
+//    /**
+//     * 根据name进行模糊查询
+//     */
+//
+//    @Test
+//    public void testlikeName(){
+//        List<User> users = userDao.findByName("%王%");
+//        for (User user:users
+//             ) {
+//            System.out.println(user);
+//
+//        }
+//    }
+//
+//
+//    /**
+//     *  查询全部用户条数
+//     * */
+//    @Test
+//    public void testCount(){
+//
+//        int total = userDao.findTotal();
+//        System.out.println(total);
+//    }
 
 }
 

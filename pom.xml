@@ -12,6 +12,7 @@
         <module>mybatis</module>
         <module>mybatis2</module>
         <module>mybatis3</module>
+        <module>mybatis4</module>
     </modules>
 
 

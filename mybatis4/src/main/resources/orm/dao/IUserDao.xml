@@ -6,29 +6,29 @@
 <mapper namespace="orm.dao.IUserDao">
 
 
-    <!--查询所有-->
-    <!--配置查询所有,resulteType返回封装的结果集-->
-    <resultMap id="userMap" type="orm.domain.User.entity.User">
+    <!--&lt;!&ndash;查询所有&ndash;&gt;-->
+    <!--&lt;!&ndash;配置查询所有,resulteType返回封装的结果集&ndash;&gt;-->
+    <!--<resultMap id="userMap" type="orm.domain.User.entity.User">-->
 
-        <!--主键字段的对应-->
-        <id property="id" column="id"></id>
+        <!--&lt;!&ndash;主键字段的对应&ndash;&gt;-->
+        <!--<id property="id" column="id"></id>-->
 
 
 
-        <!--非主键字段的对应-->
-        <result property="username" column="username"></result>
-        <result property="address" column="address"></result>
-        <result property="sex" column="sex"></result>
-        <result property="birthday" column="birthdy"></result>
-    </resultMap>
-    <select id="findAll" resultMap="userMap">
+        <!--&lt;!&ndash;非主键字段的对应&ndash;&gt;-->
+        <!--<result property="username" column="username"></result>-->
+        <!--<result property="address" column="address"></result>-->
+        <!--<result property="sex" column="sex"></result>-->
+        <!--<result property="birthday" column="birthdy"></result>-->
+    <!--</resultMap>-->
+    <select id="findAll" resultType="User">
         select * from user;
     </select>
 
 
     <!--parameterType 使用于获取输入的类型-->
     <!--保存用户    #{}  获取的是orm.domain.User对应 getId，getUsername，getBirthday，getSex-->
-    <insert id="saveUser" parameterType="orm.domain.User.entity.User">
+    <insert id="saveUser" parameterType="User">
         <!-- 配置插入操作后获取的id值 -->
         <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
             select last_insert_id();
@@ -53,7 +53,7 @@
 
     <!--根据id进行查询-->
 
-    <select id="findById" parameterType="int" resultType="orm.domain.User.entity.User">
+    <select id="findById" parameterType="int" resultType="User">
         select  * from  user  where id =#{uid};
     </select>
 
