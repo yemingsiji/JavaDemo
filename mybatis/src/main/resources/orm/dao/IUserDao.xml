@@ -5,8 +5,8 @@
 
 <mapper namespace="orm.dao.IUserDao">
 
-    <!--配置查询所有-->
-    <select id ="findAll" resultType="orm.domain.User">
+    <!--配置查询所有- resulteType是封装user返回对象 -->
+    <select id="findAll" resultType="orm.domain.User.entity.User">
         select * from user;
     </select>
 </mapper>

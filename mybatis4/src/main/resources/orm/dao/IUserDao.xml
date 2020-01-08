@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orm.dao.IUserDao">
+
+
+    <!--&lt;!&ndash;查询所有&ndash;&gt;-->
+    <!--&lt;!&ndash;配置查询所有,resulteType返回封装的结果集&ndash;&gt;-->
+    <!--<resultMap id="userMap" type="orm.domain.User.entity.User">-->
+
+        <!--&lt;!&ndash;主键字段的对应&ndash;&gt;-->
+        <!--<id property="id" column="id"></id>-->
+
+
+
+        <!--&lt;!&ndash;非主键字段的对应&ndash;&gt;-->
+        <!--<result property="username" column="username"></result>-->
+        <!--<result property="address" column="address"></result>-->
+        <!--<result property="sex" column="sex"></result>-->
+        <!--<result property="birthday" column="birthdy"></result>-->
+    <!--</resultMap>-->
+    <select id="findAll" resultType="User">
+        select * from user;
+    </select>
+
+
+    <!--parameterType 使用于获取输入的类型-->
+    <!--保存用户    #{}  获取的是orm.domain.User对应 getId，getUsername，getBirthday，getSex-->
+    <insert id="saveUser" parameterType="User">
+        <!-- 配置插入操作后获取的id值 -->
+        <selectKey keyColumn="id" keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+
+        insert into user(username,address,sex,birthday)values (#{username},#{address},#{sex},#{birthday});
+
+    </insert>
+
+    <!--更新用户-->
+    <update id="updateUser" parameterType="orm.domain.User.entity.User">
+        update user set username=#{username},address=#{address},sex=#{sex},birthday={#birthday} where id = #{id};
+    </update>
+
+    <!--根据id删除用户的操作-->
+
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id = #{uid};
+    </delete>
+
+
+    <!--根据id进行查询-->
+
+    <select id="findById" parameterType="int" resultType="User">
+        select  * from  user  where id =#{uid};
+    </select>
+
+    <!--根据名称进行模糊查询-->
+
+    <select id="findByName" parameterType="string" resultType="orm.domain.User.entity.User">
+        select * from user where username like #{username};
+    </select>
+
+    <!--查询总用户数-->
+    <select id="findTotal" resultType="int">
+        select count(id) from user;
+    </select>
+</mapper>
